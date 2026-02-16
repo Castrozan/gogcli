@@ -25,6 +25,7 @@ const (
 	ServiceAppScript Service = "appscript"
 	ServiceGroups    Service = "groups"
 	ServiceKeep      Service = "keep"
+	ServiceYouTube   Service = "youtube"
 )
 
 const (
@@ -74,6 +75,7 @@ var serviceOrder = []Service{
 	ServiceAppScript,
 	ServiceGroups,
 	ServiceKeep,
+	ServiceYouTube,
 }
 
 var serviceInfoByService = map[Service]serviceInfo{
@@ -202,6 +204,11 @@ var serviceInfoByService = map[Service]serviceInfo{
 		user:   false,
 		apis:   []string{"Keep API"},
 		note:   "Workspace only; service account (domain-wide delegation)",
+	},
+	ServiceYouTube: {
+		scopes: []string{"https://www.googleapis.com/auth/youtube"},
+		user:   true,
+		apis:   []string{"YouTube Data API"},
 	},
 }
 
@@ -521,6 +528,12 @@ func scopesForServiceWithOptions(service Service, opts ScopeOptions) ([]string, 
 	case ServiceGroups:
 		return Scopes(service)
 	case ServiceKeep:
+		return Scopes(service)
+	case ServiceYouTube:
+		if opts.Readonly {
+			return []string{"https://www.googleapis.com/auth/youtube.readonly"}, nil
+		}
+
 		return Scopes(service)
 	default:
 		return nil, errUnknownService
