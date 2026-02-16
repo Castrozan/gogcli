@@ -49,7 +49,8 @@ func (c *YouTubeInfoCmd) Run(ctx context.Context, flags *RootFlags) error {
 		return err
 	}
 
-	videos := response.Items
+	var videos []*youtube.Video
+	videos = response.Items
 	if outfmt.IsJSON(ctx) {
 		return outfmt.WriteJSON(ctx, os.Stdout, map[string]any{
 			"videos": videos,
