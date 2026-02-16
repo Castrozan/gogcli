@@ -29,7 +29,7 @@ const (
 
 type RootFlags struct {
 	Color          string `help:"Color output: auto|always|never" default:"${color}"`
-	Account        string `help:"Account email for API commands (gmail/calendar/chat/classroom/drive/docs/slides/contacts/tasks/people/sheets/forms/appscript)" aliases:"acct" short:"a"`
+	Account        string `help:"Account email for API commands (gmail/calendar/chat/classroom/drive/docs/slides/contacts/tasks/people/sheets/forms/appscript/youtube)" aliases:"acct" short:"a"`
 	Client         string `help:"OAuth client name (selects stored credentials + token bucket)" default:"${client}"`
 	EnableCommands string `help:"Comma-separated list of enabled top-level commands (restricts CLI)" default:"${enabled_commands}"`
 	JSON           bool   `help:"Output JSON to stdout (best for scripting)" default:"${json}" aliases:"machine" short:"j"`
@@ -73,6 +73,7 @@ type CLI struct {
 	Contacts   ContactsCmd           `cmd:"" aliases:"contact" help:"Google Contacts"`
 	Tasks      TasksCmd              `cmd:"" aliases:"task" help:"Google Tasks"`
 	People     PeopleCmd             `cmd:"" aliases:"person" help:"Google People"`
+	YouTube    YouTubeCmd            `cmd:"" name:"youtube" aliases:"yt" help:"YouTube Data API"`
 	Keep       KeepCmd               `cmd:"" help:"Google Keep (Workspace only)"`
 	Sheets     SheetsCmd             `cmd:"" aliases:"sheet" help:"Google Sheets"`
 	Forms      FormsCmd              `cmd:"" aliases:"form" help:"Google Forms"`
